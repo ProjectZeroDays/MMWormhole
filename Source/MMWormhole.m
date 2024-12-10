@@ -1,3 +1,4 @@
+```objective-c
 //
 // MMWormhole.m
 //
@@ -128,6 +129,7 @@ void wormholeNotificationCallback(CFNotificationCenterRef center,
 
 #pragma mark - Private Notification Methods
 
+// This method sends a notification for a message with a specific identifier.
 - (void)sendNotificationForMessageWithIdentifier:(nullable NSString *)identifier {
     CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
     CFDictionaryRef const userInfo = NULL;
@@ -136,6 +138,7 @@ void wormholeNotificationCallback(CFNotificationCenterRef center,
     CFNotificationCenterPostNotification(center, str, NULL, userInfo, deliverImmediately);
 }
 
+// This method registers for notifications with a specific identifier.
 - (void)registerForNotificationsWithIdentifier:(nullable NSString *)identifier {
     [self unregisterForNotificationsWithIdentifier:identifier];
     
@@ -170,6 +173,7 @@ void wormholeNotificationCallback(CFNotificationCenterRef center,
                                                       userInfo:@{@"identifier" : identifier}];
 }
 
+// This method is called when a message notification is received.
 - (void)didReceiveMessageNotification:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     NSString *identifier = [userInfo valueForKey:@"identifier"];

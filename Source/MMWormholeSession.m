@@ -1,3 +1,4 @@
+```objective-c
 //
 // MMWormholeSession.m
 //
@@ -86,6 +87,7 @@
 
 #pragma mark - WCSessionDelegate Methods
 
+// This method is called when a message is received from the WatchConnectivity framework.
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message {
     for (NSString *identifier in message.allKeys) {
         NSData *data = message[identifier];
@@ -95,6 +97,7 @@
     }
 }
 
+// This method is called when an application context is received from the WatchConnectivity framework.
 - (void)session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *, id> *)applicationContext {
     for (NSString *identifier in applicationContext.allKeys) {
         NSData *data = applicationContext[identifier];
@@ -104,6 +107,7 @@
     }
 }
 
+// This method is called when a file is received from the WatchConnectivity framework.
 - (void)session:(nonnull WCSession *)session didReceiveFile:(nonnull WCSessionFile *)file {
     NSString *identifier = file.metadata[@"identifier"];
     
@@ -132,4 +136,3 @@
 }
 
 @end
-

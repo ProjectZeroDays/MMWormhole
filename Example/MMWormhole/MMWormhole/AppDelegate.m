@@ -1,3 +1,4 @@
+```objective-c
 //
 //  AppDelegate.m
 //  MMWormhole
@@ -14,9 +15,9 @@
 
 @implementation AppDelegate
 
-
+// The AppDelegate class is responsible for handling application-level events and managing the app's lifecycle.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // This method is called when the application has finished launching. It is used to perform any final initialization before the app is presented to the user.
     return YES;
 }
 
