@@ -221,6 +221,22 @@ wormhole.listenForMessageWithIdentifier("messageIdentifier", listener: { (messag
 })
 ```
 
+## Troubleshooting Common Issues
+
+Here are some common issues and their solutions:
+
+### Issue 1: Messages are not being received
+
+Solution: Check Project->Capabilities->App Groups. Three checkmarks should be displayed in the steps section.
+
+### Issue 2: Messages are being received but not processed
+
+Solution: Ensure that your listeners are set up correctly and that you are calling the appropriate methods to process the messages.
+
+### Issue 3: Messages are being processed but not displayed
+
+Solution: Verify that your UI is being updated correctly and that you are using the correct message identifiers.
+
 ## Credits
 
 MMWormhole was created by [Conrad Stoll](http://conradstoll.com) at [Mutual Mobile](http://www.mutualmobile.com).
