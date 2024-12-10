@@ -164,6 +164,63 @@ Three checkmarks should be displayed in the steps section.
 <img src="MMWormhole_incorrect.png") alt="Incorrect App Group Capabilities"/>
 </p>
 
+## Installation Instructions
+
+To install MMWormhole, follow these steps:
+
+1. Add MMWormhole to your project using CocoaPods, Carthage, or by downloading the source files.
+2. Configure your app and extension to support App Groups.
+3. Initialize MMWormhole with your App Group identifier and an optional directory name.
+4. Begin using MMWormhole to pass messages between your app and extension.
+
+## Detailed Usage Examples
+
+Here are some detailed usage examples for MMWormhole:
+
+### Example 1: Passing a Message
+
+Objective-C:
+```objective-c
+[self.wormhole passMessageObject:@{@"titleString" : title} 
+                      identifier:@"messageIdentifier"];
+```
+
+Swift:
+```swift
+wormhole.passMessageObject("titleString", identifier: "messageIdentifier")
+```
+
+### Example 2: Reading a Message
+
+Objective-C:
+```objective-c
+id messageObject = [self.wormhole messageWithIdentifier:@"messageIdentifier"];
+```
+
+Swift:
+```swift
+let messageObject = wormhole.messageWithIdentifier("messageIdentifier")
+```
+
+### Example 3: Listening for Message Changes
+
+Objective-C:
+```objective-c
+[self.wormhole listenForMessageWithIdentifier:@"messageIdentifier" 
+ listener:^(id messageObject) {
+    // Do Something
+}];
+```
+
+Swift:
+```swift
+wormhole.listenForMessageWithIdentifier("messageIdentifier", listener: { (messageObject) -> Void in
+    if let message: AnyObject = messageObject {
+        // Do something
+    }
+})
+```
+
 ## Credits
 
 MMWormhole was created by [Conrad Stoll](http://conradstoll.com) at [Mutual Mobile](http://www.mutualmobile.com).
