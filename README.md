@@ -4,9 +4,32 @@ MMWormhole creates a bridge between an iOS or OS X extension and its containing 
 
 The wormhole also supports CFNotificationCenter Darwin Notifications in an effort to support realtime change notifications. When a message is passed to the wormhole, interested parties can listen and be notified of these changes on either side of the wormhole. The effect is nearly instant updates on either side when a message is sent through the wormhole.
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Example](#example)
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Installation Instructions](#installation-instructions)
+- [Detailed Usage Examples](#detailed-usage-examples)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [License](#license)
+
 <p align="center">
 <img src="MMWormhole.gif") alt="Example App"/>
 </p>
+
+## Introduction
+
+MMWormhole is designed to make it easy to share very basic information and commands between an extension and its containing application. The wormhole should remain stable whether the containing app is running or not, but notifications will only be triggered in the containing app if the app is awake in the background. This makes MMWormhole ideal for cases where the containing app is already running via some form of background modes. 
+
+A good way to think of the wormhole is a collection of shared mailboxes. An identifier is essentially a unique mailbox you can send messages to. You know where a message will be delivered to because of the identifier you associate with it, but not necessarily when the message will be picked up by the recipient. If the app or extension are in the background, they may not receive the message immediately. By convention, sending messages should be done from one side to another, not necessarily from yourself to yourself. It's also a good practice to check the contents of your mailbox when your app or extension wakes up, in case any messages have been left there while you were away.
+
+MMWormhole uses NSKeyedArchiver as a serialization medium, so any object that is NSCoding compliant can work as a message. For many apps, sharing simple strings, numbers, or JSON objects is sufficient to drive the UI of a Widget or Apple Watch app. Messages can be sent and persisted easily as archive files and read later when the app or extension is woken up later.
+
+Using MMWormhole is extremely straightforward. The only real catch is that your app and its extensions must support shared app groups. The group will be used for writing the archive files that represent each message. While larger files and structures, including a whole Core Data database, can be shared using App Groups, MMWormhole is designed to use its own directory simply to pass messages. Because of that, a best practice is to initialize MMWormhole with a directory name that it will use within your app's shared App Group.
 
 ## Example
 
@@ -24,6 +47,12 @@ The wormhole also supports CFNotificationCenter Darwin Notifications in an effor
 - Install MMWormhole via CocoaPods or by downloading the Source files
 - [Configure your App and Extension to support App Groups](https://developer.apple.com/library/ios/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html)
 - Begin using MMWormhole to pass messages between your App and Extension
+
+### Prerequisites
+
+- Xcode 7.0 or later
+- iOS 9.0 or later
+- An Apple Developer account with access to App Groups
 
 ### Note
 
@@ -237,12 +266,14 @@ Solution: Ensure that your listeners are set up correctly and that you are calli
 
 Solution: Verify that your UI is being updated correctly and that you are using the correct message identifiers.
 
-## Credits
+## Contributing
 
-MMWormhole was created by [Conrad Stoll](http://conradstoll.com) at [Mutual Mobile](http://www.mutualmobile.com).
+We welcome contributions to MMWormhole! If you would like to contribute, please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to get started.
 
-Credit also to [Wade Spires](https://devforums.apple.com/people/mindsaspire), [Tom Harrington](https://twitter.com/atomicbird), and [Rene Cacheaux](https://twitter.com/rcachatx) for work and inspiration surrounding notifications between the containing app and it's extensions.
+## Code of Conduct
+
+We are committed to fostering a welcoming and inclusive community. Please read our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file to understand the expectations for behavior and interactions within the community.
 
 ## License
 
-MMWormhole is available under the MIT license. See the LICENSE file for more info.
+MMWormhole is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
